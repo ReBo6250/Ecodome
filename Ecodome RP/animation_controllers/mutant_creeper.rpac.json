@@ -1,0 +1,76 @@
+{
+  "format_version": "1.18.0",
+  "animation_controllers": {
+    "controller.animation.mutant_creeper.walk": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "animations": [ "a.idle" ],
+          "blend_transition": 0.2,
+          "transitions": [
+            { "walk": "q.ground_speed > 0.1" }
+          ]
+        },
+        "walk": {
+          "animations": [ "a.walk" ],
+          "blend_transition": 0.2,
+          "transitions": [
+            { "default": "q.ground_speed < 0.1" }
+          ]
+        }
+      }
+    },
+    "controller.animation.mutant_creeper.idle": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "blend_transition": 0.2,
+          "transitions": [
+            { "idle": "q.ground_speed < 0.1" }
+          ]
+        },
+        "idle": {
+          "animations": [ "a.idle" ],
+          "blend_transition": 0.2,
+          "transitions": [
+            { "default": "q.ground_speed > 0.1" }
+          ]
+        }
+      }
+    },
+    "controller.animation.mutant_creeper.melee_attack": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "blend_transition": 0.2,
+          "transitions": [
+            { "melee_attack": "v.attack_time > 0.1" }
+          ]
+        },
+        "melee_attack": {
+          "animations": [ "a.melee_attack" ],
+          "blend_transition": 0.2,
+          "transitions": [
+            { "default": "v.attack_time < 0.1" }
+          ]
+        }
+      }
+    },
+    "controller.animation.mutant_creeper.charge": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "animations": [{"a.charge": "v.swelling_scale1 > 0.0"}]
+        }
+      }
+    },
+    "controller.animation.mutant_creeper.death": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "animations": [{"a.death": "!q.is_alive"}]
+        }
+      }
+    }
+  }
+}

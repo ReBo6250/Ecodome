@@ -1,0 +1,416 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.mutant_creeper.walk": {
+			"loop": true,
+			"animation_length": 0.75,
+			"bones": {
+				"main": {
+					"rotation": [0, 0, 0],
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.25": [0, 1, 0],
+						"0.5": [0, -0.75, 0],
+						"0.75": [0, 0, 0]
+					}
+				},
+				"body": {
+					"rotation": {
+						"0.0": [20, 0, 0],
+						"0.375": [12.5, 0, 0],
+						"0.75": [20, 0, 0]
+					}
+				},
+				"leg": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.25": [22.5, 0, 0],
+						"0.5": [-10, 0, 0],
+						"0.75": [0, 0, 0]
+					}
+				},
+				"lowerleg": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.25": [42.5, 0, 0],
+						"0.5": [-40, 0, 0],
+						"0.75": [0, 0, 0]
+					}
+				},
+				"head2": {
+					"rotation": {
+						"0.0": [0, 0, -25],
+						"0.375": [15, 0, -25],
+						"0.75": [0, 0, -25]
+					}
+				},
+				"leg6": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.25": [10, 0, 0],
+						"0.75": [0, 0, 0]
+					}
+				},
+				"lowerleg6": {
+					"rotation": {
+						"0.0": [45, 0, 0],
+						"0.5": [-15, 0, 0],
+						"0.75": [45, 0, 0]
+					}
+				},
+				"leg3": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.25": [22.5, 0, 0],
+						"0.5": [-5, 0, 0],
+						"0.75": [0, 0, 0]
+					}
+				},
+				"lowerleg3": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.25": [42.5, 0, 0],
+						"0.5": [-50, 0, 0],
+						"0.75": [0, 0, 0]
+					}
+				},
+				"leg4": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.25": [0, 0, 0],
+						"0.75": [0, 0, 0]
+					}
+				},
+				"lowerleg4": {
+					"rotation": {
+						"0.0": [45, 0, 0],
+						"0.5": [-15, 0, 0],
+						"0.75": [45, 0, 0]
+					}
+				},
+				"leg2": {
+					"rotation": {
+						"0.0": [-10, 0, 0],
+						"0.5": [22.5, 0, 0],
+						"0.75": [-10, 0, 0]
+					}
+				},
+				"lowerleg2": {
+					"rotation": {
+						"0.0": [-40, 0, 0],
+						"0.25": [10, 0, 0],
+						"0.5": [42.5, 0, 0],
+						"0.75": [-40, 0, 0]
+					}
+				},
+				"leg5": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.25": [-20, 0, 0],
+						"0.5": [0, 0, 0],
+						"0.75": [0, 0, 0]
+					}
+				},
+				"lowerleg5": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.25": [-22.5, 0, 0],
+						"0.5": [0, 0, 0],
+						"0.75": [0, 0, 0]
+					}
+				},
+				"head3": {
+					"rotation": {
+						"0.0": [0, 0, 15],
+						"0.375": [20, 0, 15],
+						"0.75": [0, 0, 15]
+					}
+				},
+				"tnt": {
+					"rotation": [0, 0, 0],
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.125": [0, -1, 0],
+						"0.25": [0, 0, 0],
+						"0.375": [0, 0, 0],
+						"0.4583": [0, 0, 0],
+						"0.5833": [0, -1, 0],
+						"0.7083": [0, 0, 0]
+					}
+				}
+			}
+		},
+		"animation.mutant_creeper.charge": {
+			"animation_length": 0.75,
+			"loop": "hold_on_last_frame",
+			"bones": {
+				"main": {
+					"scale": ["variable.swelling_scale1", "variable.swelling_scale2", "variable.swelling_scale1"]
+				},
+				"body": {
+					"rotation": {
+						"0.0": {
+							"post": [17.5, 0, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"0.2917": {
+							"post": [45, 0, 0],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				},
+				"head": {
+					"rotation": {
+						"0.0": {
+							"post": [-7.5, 0, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"0.3333": {
+							"post": [52.5, 0, 0],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				},
+				"head2": {
+					"rotation": {
+						"0.0": {
+							"post": [0, 0, -20],
+							"lerp_mode": "catmullrom"
+						},
+						"0.2917": {
+							"post": [40, 0, -20],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				},
+				"head3": {
+					"rotation": {
+						"0.0": {
+							"post": [0, 0, 25],
+							"lerp_mode": "catmullrom"
+						},
+						"0.4583": {
+							"post": [82.5, 0, 25],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				}
+			}
+		},
+		"animation.mutant_creeper.attack": {
+			"animation_length": 0.75,
+			"bones": {
+				"body": {
+					"rotation": {
+						"0.0": {
+							"post": [12.5, 0, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"0.25": {
+							"post": [-10, 0, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"0.5": {
+							"post": [22.5, 0, 0],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				},
+				"head": {
+					"rotation": {
+						"0.0": {
+							"post": [7.5, 0, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"0.3333": {
+							"post": [-10, 0, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"0.5833": {
+							"post": [22.5, 0, 0],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				},
+				"head2": {
+					"rotation": {
+						"0.0": {
+							"post": [13.53873, 23.56023, -2.18226],
+							"lerp_mode": "catmullrom"
+						},
+						"0.2917": {
+							"post": [-11.46127, 23.56023, -2.18226],
+							"lerp_mode": "catmullrom"
+						},
+						"0.6667": {
+							"post": [21.03873, 23.56023, -2.18226],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				},
+				"head3": {
+					"rotation": {
+						"0.0": {
+							"post": [0, -10, 17.5],
+							"lerp_mode": "catmullrom"
+						},
+						"0.25": {
+							"post": [-12.5, -10, 17.5],
+							"lerp_mode": "catmullrom"
+						},
+						"0.625": {
+							"post": [17.5, -10, 17.5],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				}
+			}
+		},
+		"animation.mutant_creeper.death": {
+			"animation_length": 0.95833,
+			"bones": {
+				"main": {
+					"rotation": [ "Math.min(Math.sqrt(Math.max(0, query.anim_time * 20 - 0.5) / 20 * 1.6), 1) * 90", 0, "Math.min(Math.sqrt(Math.max(0, query.anim_time * 20 - 0.5) / 20 * 1.6), 1) * -90" ],
+					"position": {
+						"0.5": [0, 0, 0],
+						"0.625": [0, 5, 0]
+					}
+				},
+				"body": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0],
+					"scale": 1
+				},
+				"boxtnt": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.3333": [-117.5, 0, 0],
+						"0.4583": [-138.89, 0, 0],
+						"0.75": [-180, 0, 0]
+					},
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.25": [0, -17.48, 7.47],
+						"0.2917": [0, -19.78, 8.96],
+						"0.3333": [0, -29, 9],
+						"0.4583": [0, -37.91, 4.82],
+						"0.625": [0, -43.14, -10.75],
+						"0.75": [0, -46, -12.75]
+					},
+					"scale": 1
+				},
+				"leg": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.25": [30, 0, 0],
+						"0.5": [87.5, 0, 0],
+						"0.6667": [47.5, 0, 0]
+					}
+				},
+				"lowerleg": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.25": [20, 0, 0],
+						"0.6667": [20, 0, 0],
+						"0.75": [-45, 0, 0],
+						"0.7917": [-35, 0, 0],
+						"0.8333": [-47.5, 0, 0]
+					}
+				},
+				"leg6": {
+					"rotation": {
+						"0.375": [0, 0, 0],
+						"0.5417": [45, 0, 0],
+						"0.75": [-20, 0, 0]
+					}
+				},
+				"leg3": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.25": [30, 0, 0],
+						"0.5": [80, 0, 0],
+						"0.75": [50, 0, 0]
+					}
+				},
+				"lowerleg3": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.25": [22.5, 0, 0],
+						"0.75": [22.5, 0, 0],
+						"0.7917": [-47.5, 0, 0]
+					}
+				},
+				"leg4": {
+					"rotation": {
+						"0.375": [0, 0, 0],
+						"0.5417": [45, 0, 0],
+						"0.75": [-20, 0, 0]
+					}
+				},
+				"leg2": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.25": [32.5, 0, 0],
+						"0.5": [92.5, 0, 0],
+						"0.7083": [50, 0, 0]
+					}
+				},
+				"lowerleg2": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.25": [20, 0, 0],
+						"0.7083": [20, 0, 0],
+						"0.7917": [-47.5, 0, 0],
+						"0.8333": [-42.5, 0, 0],
+						"0.875": [-47.5, 0, 0]
+					}
+				},
+				"leg5": {
+					"rotation": {
+						"0.375": [0, 0, 0],
+						"0.5417": [45, 0, 0],
+						"0.75": [-20, 0, 0]
+					}
+				}
+			}
+		},
+		"animation.mutant_creeper.idle": {
+			"animation_length": 0.625,
+			"loop": true,
+			"bones": {
+				"body": {
+					"rotation": [20, 0, 0]
+				},
+				"head2": {
+					"rotation": [0, 0, -12.5]
+				},
+				"head3": {
+					"rotation": [0, 0, 17.5]
+				}
+			}
+		},
+		"animation.mutant_creeper.look_at_target": {
+			"loop": true,
+			"bones": {
+				"head": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": ["query.target_x_rotation - this", "query.target_y_rotation - this", 0]
+				},
+				"head2": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": ["query.target_x_rotation - this", "query.target_y_rotation - this", 0]
+				},
+				"head3": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": ["query.target_x_rotation - this", "query.target_y_rotation - this", 0]
+				}
+			}
+		}
+	}
+}

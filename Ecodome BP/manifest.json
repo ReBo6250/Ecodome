@@ -1,0 +1,52 @@
+{
+	"format_version": 2,
+	"metadata": {
+		"authors": [
+			"ReBo"
+		],
+		"generated_with": {
+			"bridge": [
+				"2.2.13"
+			],
+			"dash": [
+				"0.8.18"
+			]
+		}
+	},
+	"header": {
+		"name": "pack.name",
+		"description": "pack.description",
+		"min_engine_version": [
+			1,
+			18,
+			0
+		],
+		"uuid": "bee27346-f5a0-47a4-9253-0ff425af3373",
+		"version": [
+			1,
+			0,
+			0
+		]
+	},
+	"modules": [
+		{
+			"type": "data",
+			"uuid": "ecf4e839-35cf-49bd-a664-9aaab6322ea3",
+			"version": [
+				1,
+				0,
+				0
+			]
+		}
+	],
+	"dependencies": [
+		{
+			"uuid": "5fedd146-8148-4631-835d-0eaed6438ce5",
+			"version": [
+				1,
+				0,
+				0
+			]
+		}
+	]
+}

@@ -1,0 +1,53 @@
+{
+	"format_version": "1.10.0",
+	"minecraft:client_entity": {
+		"description": {
+			"identifier": "ncs:mutant_creeper",
+			"materials": {
+				"default": "entity_alphatest"
+			},
+			"textures": {
+				"default": "textures/entity/mutant_creeper"
+			},
+			"geometry": {
+				"default": "geometry.mutant_creeper"
+			},
+			"render_controllers": [
+				"controller.render.mutant_creeper"
+			],
+			"spawn_egg": {
+				"base_color": "#80e211",
+				"overlay_color": "#e6603f"
+			},
+			"scripts": {
+				"pre_animation": [
+					"variable.wobble = Math.sin(query.swell_amount * 5730) * query.swell_amount * 0.01 + 1.0;",
+					"variable.swelling_scale1 = (Math.pow(Math.clamp(query.swell_amount, 0.0, 1.0), 4.0) * 0.4 + 1.0) * variable.wobble;",
+					"variable.swelling_scale2 = (Math.pow(Math.clamp(query.swell_amount, 0.0, 1.0), 4.0) * 0.1 + 1.0) / variable.wobble;",
+					"variable.flash = Math.mod(Math.Round(query.swell_amount * 10.0), 2.0);"
+				],
+				"animate": [
+					"a.look_at_target",
+
+					"ac.walk",
+					"ac.death",
+					"ac.melee_attack",
+					"ac.charge"
+				]
+			},
+			"animations": {
+				"a.idle": "animation.mutant_creeper.idle",
+				"a.walk": "animation.mutant_creeper.walk",
+				"a.death": "animation.mutant_creeper.death",
+				"a.melee_attack": "animation.mutant_creeper.attack",
+				"a.charge": "animation.mutant_creeper.charge",
+				"a.look_at_target": "animation.mutant_creeper.look_at_target",
+
+				"ac.walk": "controller.animation.mutant_creeper.walk",
+				"ac.death": "controller.animation.mutant_creeper.death",
+				"ac.melee_attack": "controller.animation.mutant_creeper.melee_attack",
+				"ac.charge": "controller.animation.mutant_creeper.charge"
+			}
+		}
+	}
+}

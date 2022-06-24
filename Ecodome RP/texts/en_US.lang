@@ -1,0 +1,4 @@
+pack.name=Ecodome RP
+pack.description=
+item.spawn_egg.entity.ncs:mutant_creeper.name=Spawn Mutant Creeper
+entity.ncs:mutant_creeper.name=Mutant Creeper
