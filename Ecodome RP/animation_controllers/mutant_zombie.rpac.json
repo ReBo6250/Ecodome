@@ -1,0 +1,58 @@
+{
+  "format_version": "1.18.0",
+  "animation_controllers": {
+    "controller.animation.mutant_zombie.walk": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "animations": [ "a.idle" ],
+          "blend_transition": 0.2,
+          "transitions": [
+            { "walk": "q.ground_speed > 0.1" }
+          ]
+        },
+        "walk": {
+          "animations": [ "a.walk" ],
+          "blend_transition": 0.2,
+          "transitions": [
+            { "default": "q.ground_speed < 0.1" }
+          ]
+        }
+      }
+    },
+    "controller.animation.mutant_zombie.attack": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "blend_transition": 0.2,
+          "transitions": [
+            { "melee_attack": "v.attack_time > 0.1"},
+            { "knockback": "q.is_roaring"}
+          ]
+        },
+        "melee_attack": {
+          "animations": [ "a.melee_attack" ],
+          "blend_transition": 0.2,
+          "transitions": [
+            { "default": "q.all_animations_finished" }
+          ]
+        },
+        "knockback": {
+          "animations": [ "a.knockback" ],
+          "blend_transition": 0.2,
+          "transitions": [
+            { "default": "q.all_animations_finished" }
+          ]
+        }
+      }
+    },
+    "controller.animation.mutant_zombie.death": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "animations": [{"a.death": "!q.is_alive"}]
+        }
+      }
+    }
+  }
+}

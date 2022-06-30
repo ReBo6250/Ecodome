@@ -1,0 +1,22 @@
+{
+  "format_version": "1.18.0",
+  "animation_controllers" : {
+    "controller.animation.entity.catch" : {
+      "initial_state" : "default",
+      "states" : {
+        "default" : {
+          "transitions" : [
+            { "state_1" : "query.is_stunned" }
+          ]
+        },
+        "state_1" : {
+          "on_entry": ["@s e:default"],
+          "on_exit": ["/say run your function here."],
+          "transitions" : [
+            { "default" : "!query.is_stunned" }
+          ]
+        }
+      }
+    }
+  }
+}

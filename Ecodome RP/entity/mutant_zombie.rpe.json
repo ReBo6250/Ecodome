@@ -1,0 +1,45 @@
+{
+	"format_version": "1.10.0",
+	"minecraft:client_entity": {
+		"description": {
+			"identifier": "ncs:mutant_zombie",
+			"materials": {
+				"default": "entity_alphatest"
+			},
+			"textures": {
+				"default": "textures/entity/mutant_zombie"
+			},
+			"geometry": {
+				"default": "geometry.mutant_zombie"
+			},
+			"render_controllers": [
+				"controller.render.default"
+			],
+			"spawn_egg": {
+				"base_color": "#a8c28a",
+				"overlay_color": "#206617"
+			},
+			"scripts": {
+				"animate": [
+					"a.look_at_target",
+
+					"ac.walk",
+					"ac.death",
+					"ac.attack"
+				]
+			},
+			"animations": {
+				"a.idle": "animation.mutant_zombie.idle",
+				"a.walk": "animation.mutant_zombie.walk",
+				"a.death": "animation.mutant_zombie.death",
+				"a.melee_attack": "animation.mutant_zombie.melee_attack",
+				"a.knockback": "animation.mutant_zombie.knockback",
+				"a.look_at_target": "animation.mutant_zombie.look_at_target",
+
+				"ac.walk": "controller.animation.mutant_zombie.walk",
+				"ac.death": "controller.animation.mutant_zombie.death",
+				"ac.attack": "controller.animation.mutant_zombie.attack"
+			}
+		}
+	}
+}

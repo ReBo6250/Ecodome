@@ -2,8 +2,7 @@
 	"format_version": "1.18.10",
 	"minecraft:entity": {
 		"description": {
-			"identifier": "ncs:mutant_creeper",
-			"runtime_identifier": "minecraft:creeper",
+			"identifier": "ncs:mutant_skeleton",
 			"is_spawnable": true,
 			"is_summonable": true,
 			"is_experimental": false,
@@ -11,62 +10,28 @@
 			"scripts": {}
 		},
 		"components": {
-			"minecraft:collision_box": { "width": 1.8, "height": 2.6 },
-			"minecraft:health": { "value": 100, "max": 100 },
-			"minecraft:loot": { "table": "loot_tables/entities/creeper.json" },
-			"minecraft:boss": { "hud_range": 30, "name": "entity.ncs:mutant_creeper.name", "should_darken_sky": false },
+			"minecraft:type_family": { "family": [ "ncs", "mutant_skeleton", "undead", "skeleton" ] },
+			"minecraft:health": { "value": 150, "max": 150 },
+			"minecraft:collision_box": { "width": 2.0, "height": 3.6 },
+			"minecraft:attack": { "damage": 4 },
+			"minecraft:loot": { "table": "loot_tables/empty.json" },
+			"minecraft:boss": { "hud_range": 50, "name": "entity.ncs:mutant_skeleton.name", "should_darken_sky": false },
 			"minecraft:nameable": {},
 			"minecraft:is_hidden_when_invisible": {},
 			"minecraft:conditional_bandwidth_optimization": {},
-			"minecraft:knockback_resistance": {
-				"value": 0.7
-			},
 			"minecraft:hurt_on_condition": {
 				"damage_conditions": [
 					{ "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true }, "cause": "lava", "damage_per_tick": 4 }
 				]
 			},
 
-			
-			"minecraft:target_nearby_sensor": {
-				"inside_range": 2.5,
-				"outside_range": 6.0,
-				"must_see": true,
-				"on_inside_range": {
-				  "event": "e:start_exploding",
-				  "target": "self"
-				},
-				"on_outside_range": {
-				  "event": "e:stop_exploding",
-				  "target": "self"
-				},
-				"on_vision_lost_inside_range": {
-					"event": "e:stop_exploding",
-					"target": "self"
-				}
+			"minecraft:burns_in_daylight": {},
+			"minecraft:behavior.flee_sun": {
+			  "priority": 2,
+			  "speed_multiplier": 1.2
 			}
 		},
 		"component_groups": {
-			"cg:exploding": {
-				"minecraft:explode": {
-					"fuse_length": 1.5,
-					"fuse_lit": true,
-					"power": 9,
-					"causes_fire": false,
-					"destroy_affected_by_griefing": true
-				}
-			},
-			"cg:forced_exploding": {
-				"minecraft:target_nearby_sensor": {},
-				"minecraft:explode": {
-					"fuse_length": 1.5,
-					"fuse_lit": true,
-					"power": 9,
-					"causes_fire": false,
-					"destroy_affected_by_griefing": true
-				},
-				"minecraft:on_target_escape": {}
-			},
 			"cg:variant-0": {"minecraft:variant": { "value": 0 } },
 			"cg:variant-1": {"minecraft:variant": { "value": 1 } },
 			"cg:variant-2": {"minecraft:variant": { "value": 2 } },
@@ -96,27 +61,26 @@
 			"cg:chested": { "minecraft:is_chested": {} },
 			"cg:stunned": { "minecraft:is_stunned": {} },
 			"cg:illager_captain": { "minecraft:is_illager_captain": {} },
-
+			
 			
 			"cg:physics": {
 				"minecraft:physics": {},
 				"minecraft:pushable": { "is_pushable": true, "is_pushable_by_piston": true }
 			},
+			"cg:knockback_resistance": {
+				"minecraft:knockback_resistance": { "value": 1 }
+			},
 			"cg:mob": {
-				"minecraft:type_family": { "family": [ "ncs", "mutant_creeper", "mob" ] },
 				"minecraft:experience_reward": { "on_death": "query.last_hit_by_player ? Math.Random(10,20) : 0" },
 				"minecraft:breathable": { "total_supply": 15, "suffocate_time": 0 },
 				
 				"minecraft:balloonable": { "mass": 0.9 },
 
-				"minecraft:behavior.float": { "priority": 2 },
 				"minecraft:behavior.look_at_player": { "priority": 8, "look_distance": 6.0, "probability": 0.02 },
 				"minecraft:behavior.random_look_around": { "priority": 9 }
 
 			},
 			"cg:inanimate": {
-				"minecraft:type_family": { "family": [ "ncs", "mutant_creeper", "inanimate" ] },
-				
 				"minecraft:damage_sensor": {
 					"triggers": [
 						{ "cause": "all", "deals_damage": false }
@@ -130,9 +94,9 @@
 				"minecraft:movement.basic": {},
 				"minecraft:jump.static": {},
 				"minecraft:navigation.walk": {
-					"can_path_over_water": true,
-					"avoid_water": true,
-					"avoid_damage_blocks": true
+					"is_amphibious": true,
+					"avoid_water": false,
+					"avoid_sun": true
 				},
 
 				"minecraft:behavior.follow_owner": {
@@ -271,8 +235,6 @@
 				"minecraft:behavior.panic": { "priority": 3, "speed_multiplier": 1.25 }
 			},
 			"cg:neutral": {
-				"minecraft:attack": { "damage": 4 },
-
 				"minecraft:behavior.owner_hurt_by_target": { "priority": 0 },
 				"minecraft:behavior.owner_hurt_target": { "priority": 1 },
 				"minecraft:behavior.hurt_by_target": {
@@ -282,8 +244,6 @@
 				}
 			},
 			"cg:hostile": {
-				"minecraft:attack": { "damage": 4 },
-				
 				"minecraft:behavior.owner_hurt_by_target": { "priority": 0 },
 				"minecraft:behavior.owner_hurt_target": { "priority": 1 },
 				"minecraft:behavior.hurt_by_target": {
@@ -302,23 +262,24 @@
 									{ "test": "is_family", "subject": "other", "operator": "equals", "value": "snow_golem" }
 								]
 							},
-							"max_dist": 30
+							"max_dist": 50
 						}
 					]
 				}
 			},
 			"cg:melee_attack": {
-				"minecraft:behavior.melee_attack": { "priority": 3, "cooldown_time": 2, "reach_multiplier": 1}
+				"minecraft:behavior.melee_attack": { "priority": 3, "cooldown_time": 2, "reach_multiplier": 1 }
 			},
 			"cg:ranged_attack": {
 				"minecraft:shooter": {
-					"def": "minecraft:snow_ball"
+					"def": "minecraft:arrow"
 				},
 				"minecraft:behavior.ranged_attack": {
 					"priority": 3,
 					"attack_radius": 15,
-					"charge_shoot_trigger": 2,
-					"charge_charged_trigger": 1
+					"attack_interval": 0,
+					"charge_charged_trigger": 0.0,
+					"charge_shoot_trigger": 0.8
 				}
 			},
 			"cg:delayed_attack": {
@@ -329,6 +290,68 @@
 					"reach_multiplier": 1.0,
 					"track_target": false
 				}
+			},
+			"cg:can-knockback_roar": {
+				"minecraft:target_nearby_sensor": {
+					"must_see": true,
+					"inside_range": 1,
+					"outside_range": 5,
+					"on_inside_range": { "event": "e:add-timer-knockback_roar", "target": "self" },
+					"on_outside_range": { "event": "e:remove-timer-knockback_roar", "target": "self"},
+					"on_vision_lost_inside_range": { "event": "e:remove-timer-knockback_roar", "target": "self"}
+				},
+				"minecraft:on_hurt": {
+					"filters": [
+						{
+							"all_of": [
+								{ "test": "has_damage", "subject": "self", "operator": "not", "value": "projectile" }
+							]
+						}
+					],
+					"event": "e:weight-knockback_roaring",
+					"target": "self"
+				},
+				"minecraft:on_hurt_by_player": {
+					"filters": [
+						{
+							"all_of": [
+								{ "test": "distance_to_nearest_player", "subject": "self", "operator": "<=", "value": 5.0 }
+							]
+						}
+					],
+					"event": "e:weight-knockback_roaring",
+					"target": "self"
+				}
+			},
+			"cg:timer-knockback_roar": {
+				"minecraft:timer": {
+					"time": 1,
+					"looping": true,
+					"time_down_event": { "event": "e:weight-knockback_roaring", "target": "self" }
+				}
+			},
+			"cg:knockback_roaring": {
+				"minecraft:behavior.knockback_roar": {
+					"priority": 1,
+					"duration": 1.0,
+					"attack_time": 0.5,
+					"knockback_damage": 6,
+					"knockback_horizontal_strength": 5,
+					"knockback_vertical_strength": 5,
+					"knockback_range": 5,
+					"knockback_filters": {
+					  "test": "is_family",
+					  "subject": "other",
+					  "operator": "!=",
+					  "value": "mutant_skeleton"
+					},
+					"damage_filters": {
+					},
+					"on_roar_end": {
+						"event": "e:remove-knockback_roaring"
+					},
+					"cooldown_time": 3.0
+				  }
 			},
 			"cg:baby": {
 				"minecraft:is_baby": {},
@@ -360,8 +383,8 @@
 					"require_tame": false,
 					"breed_items": [ "carrot", "beetroot", "potato" ],
 					"breeds_with": {
-						"mate_type": "ncs:mutant_creeper",
-						"baby_type": "ncs:mutant_creeper",
+						"mate_type": "ncs:mutant_skeleton",
+						"baby_type": "ncs:mutant_skeleton",
 						"breed_event": {
 							"event": "e:baby",
 							"target": "baby"
@@ -384,17 +407,46 @@
 			}
 		},
 		"events": {
-			"e:start_exploding_forced": { "add": { "component_groups": [ "cg:forced_exploding" ] } },
-			"e:start_exploding": { "add": { "component_groups": [ "cg:exploding" ] } },
-			"e:stop_exploding": { "remove": { "component_groups": [ "cg:exploding" ] } },
-			"e:mutant_creeper": { 
+			"e:mutant_skeleton": {
 				"sequence": [
-					{"trigger": "e:mob_common_hostile"}
+					{"trigger": "e:as-common_ranged_hostile"},
+					{"trigger": "e:add-knockback_resistance"},
+					{"trigger": "e:can-knockback_roar"}
 				]
 			},
-			"minecraft:entity_spawned": {"trigger": "e:mutant_creeper"},
-			"e:physics": { "add": { "component_groups": [ "cg:physics" ] } },
-			"e:remove_physics": { "remove": { "component_groups": [ "cg:physics" ] } },
+
+			"minecraft:entity_spawned": {"trigger": "e:mutant_skeleton"},
+
+
+			"e:add-physics": { "add": { "component_groups": [ "cg:physics" ] } },
+			"e:remove-physics": { "remove": { "component_groups": [ "cg:physics" ] } },
+			"e:add-knockback_resistance": { "add": { "component_groups": [ "cg:knockback_resistance" ] } },
+			"e:remove-knockback_resistance": { "remove": { "component_groups": [ "cg:knockback_resistance" ] } },
+			"e:add-ignited": { "add": { "component_groups": [ "cg:ignited" ] } },
+			"e:remove-ignited": { "remove": { "component_groups": [ "cg:ignited" ] } },
+			"e:add-sheared": { "add": { "component_groups": [ "cg:sheared" ] } },
+			"e:remove-sheared": { "remove": { "component_groups": [ "cg:sheared" ] } },
+			"e:add-chested": { "add": { "component_groups": [ "cg:chested" ] } },
+			"e:remove-chested": { "remove": { "component_groups": [ "cg:chested" ] } },
+			"e:add-stunned": { "add": { "component_groups": [ "cg:stunned" ] } },
+			"e:remove-stunned": { "remove": { "component_groups": [ "cg:stunned" ] } },
+			"e:add-illager_captain": { "add": { "component_groups": [ "cg:illager_captain" ] } },
+			"e:remove-illager_captain": { "remove": { "component_groups": [ "cg:illager_captain" ] } },
+
+
+			"e:can-knockback_roar": { "add": { "component_groups": [ "cg:can-knockback_roar" ] } },
+			"e:add-timer-knockback_roar": { "add": { "component_groups": [ "cg:timer-knockback_roar" ] } },
+			"e:remove-timer-knockback_roar": { "remove": { "component_groups": [ "cg:timer-knockback_roar" ] } },
+			"e:add-knockback_roaring": { "add": { "component_groups": [ "cg:knockback_roaring" ] } },
+			"e:remove-knockback_roaring": { "remove": { "component_groups": [ "cg:knockback_roaring" , "cg:timer-knockback_roar"] } },
+			"e:weight-knockback_roaring": { "randomize": [{"weight": 1, "trigger": "e:add-knockback_roaring"}, {"weight": 9}] },
+
+
+
+
+
+
+
 			"e:mob": { 
 				"add": { "component_groups": [ "cg:mob" ] },
 				"remove": { "component_groups": [ "cg:inanimate" ] } 
@@ -461,30 +513,40 @@
 				"remove": { "component_groups": [ "cg:despawn" ] } 
 			},
 
-			"e:mob_common_passive": {
+			"e:as-common_passive": {
 				"sequence": [
 					{"trigger": "e:mob"},
-					{"trigger": "e:physics"},
+					{"trigger": "e:add-physics"},
 					{"trigger": "e:walk"},
 					{"trigger": "e:passive"}
 				]
 			},
-			"e:mob_common_neutral": {
+			"e:as-common_neutral": {
 				"sequence": [
 					{"trigger": "e:mob"},
-					{"trigger": "e:physics"},
+					{"trigger": "e:add-physics"},
 					{"trigger": "e:walk"},
 					{"trigger": "e:neutral"},
 					{"trigger": "e:melee_attack"}
+					
 				]
 			},
-			"e:mob_common_hostile": {
+			"e:as-common_melee_hostile": {
 				"sequence": [
 					{"trigger": "e:mob"},
-					{"trigger": "e:physics"},
+					{"trigger": "e:add-physics"},
 					{"trigger": "e:walk"},
 					{"trigger": "e:hostile"},
 					{"trigger": "e:melee_attack"}
+				]
+			},
+			"e:as-common_ranged_hostile": {
+				"sequence": [
+					{"trigger": "e:mob"},
+					{"trigger": "e:add-physics"},
+					{"trigger": "e:walk"},
+					{"trigger": "e:hostile"},
+					{"trigger": "e:ranged_attack"}
 				]
 			}
 		}
