@@ -1,5 +1,5 @@
 {
-	"format_version": "1.18.10",
+	"format_version": "1.18.30",
 	"minecraft:entity": {
 		"description": {
 			"identifier": "rebo:bpe",
@@ -10,7 +10,8 @@
 			"scripts": {}
 		},
 		"components": {
-			"minecraft:type_family": { "family": [ "rebo", "bpe", "inanimate", "mob" ] },
+			"minecraft:type_family": { "family": [ "rebo", "bpe"] },
+			
 			"minecraft:collision_box": { "width": 1.0, "height": 1.0 },
 			"minecraft:health": { "value": 10, "max": 10 },
 			"minecraft:attack": { "damage": 4 },
@@ -23,11 +24,40 @@
 			"minecraft:nameable": {},
 			"minecraft:is_hidden_when_invisible": {},
 			"minecraft:conditional_bandwidth_optimization": {},
+
+			"minecraft:damage_sensor": {
+				"triggers": [
+					{ "cause": "all", "deals_damage": true }
+				]
+			},
 			"minecraft:hurt_on_condition": {
 				"damage_conditions": [
 					{ "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true }, "cause": "lava", "damage_per_tick": 4 }
 				]
-			}
+			},
+			"minecraft:environment_sensor": {
+				"triggers": [
+					{
+						"filters": {
+							"all_of": [
+								{ "test": "has_tag", "subject": "self", "operator": "equals", "value": "example" }
+							]
+						},
+						"event": "e:example",
+						"target": "self"
+					}
+				]
+			},
+			"minecraft:target_nearby_sensor": {
+				"must_see": true,
+				"inside_range": 1,
+				"outside_range": 5,
+				"on_inside_range": { "event": "e:target_on_inside_range", "target": "self" },
+				"on_outside_range": { "event": "e:target_on_outside_range", "target": "self"},
+				"on_vision_lost_inside_range": { "event": "e:on_vision_lost_inside_range", "target": "self"}
+			},
+			"minecraft:on_hurt": { "event": "e:on_hurt", "target": "self" },
+			"minecraft:on_hurt_by_player": { "event": "e:on_hurt_by_player", "target": "self" }
 		},
 		"component_groups": {
 			"cg:variant-0": {"minecraft:variant": { "value": 0 } },
@@ -88,11 +118,7 @@
 				"minecraft:behavior.random_look_around": { "priority": 9 }
 			},
 			"cg:inanimate": {
-				"minecraft:damage_sensor": {
-					"triggers": [
-						{ "cause": "all", "deals_damage": false }
-					]
-				}
+				
 			},
 			"cg:land": {
 				"minecraft:behavior.float": { "priority": 2 }
@@ -251,7 +277,7 @@
 				"minecraft:behavior.owner_hurt_by_target": { "priority": 0 },
 				"minecraft:behavior.owner_hurt_target": { "priority": 1 },
 				"minecraft:behavior.hurt_by_target": {
-					"priority": 1,
+					"priority": 5,
 					"alert_same_type": false,
 					"hurt_owner": false
 				}
@@ -259,11 +285,6 @@
 			"cg:hostile": {
 				"minecraft:behavior.owner_hurt_by_target": { "priority": 0 },
 				"minecraft:behavior.owner_hurt_target": { "priority": 1 },
-				"minecraft:behavior.hurt_by_target": {
-					"priority": 1,
-					"alert_same_type": false,
-					"hurt_owner": false
-				},
 				"minecraft:behavior.nearest_attackable_target": {
 					"priority": 4,
 					"entity_types": [
@@ -279,6 +300,11 @@
 							"max_dist": 16
 						}
 					]
+				},
+				"minecraft:behavior.hurt_by_target": {
+					"priority": 5,
+					"alert_same_type": false,
+					"hurt_owner": false
 				}
 			},
 			"cg:melee_attack": {
@@ -308,36 +334,7 @@
 				}
 			},
 			"cg:can-knockback_roar": {
-				"minecraft:target_nearby_sensor": {
-					"must_see": true,
-					"inside_range": 1,
-					"outside_range": 5,
-					"on_inside_range": { "event": "e:add-timer-knockback_roar", "target": "self" },
-					"on_outside_range": { "event": "e:remove-timer-knockback_roar", "target": "self"},
-					"on_vision_lost_inside_range": { "event": "e:remove-timer-knockback_roar", "target": "self"}
-				},
-				"minecraft:on_hurt": {
-					"filters": [
-						{
-							"all_of": [
-								{ "test": "has_damage", "subject": "self", "operator": "not", "value": "projectile" }
-							]
-						}
-					],
-					"event": "e:weight-knockback_roaring",
-					"target": "self"
-				},
-				"minecraft:on_hurt_by_player": {
-					"filters": [
-						{
-							"all_of": [
-								{ "test": "distance_to_nearest_player", "subject": "self", "operator": "<=", "value": 5.0 }
-							]
-						}
-					],
-					"event": "e:weight-knockback_roaring",
-					"target": "self"
-				}
+				"minecraft:ravager_blocked": {}
 			},
 			"cg:timer-knockback_roar": {
 				"minecraft:timer": {
@@ -429,7 +426,57 @@
 
 			"minecraft:entity_spawned": {"trigger": "e:bpe"},
 
-
+			"e:target_on_inside_range": {
+				"sequence": [
+					{
+						"filters": { "test": "has_component","subject": "self", "operator": "equals", "value": "minecraft:ravager_blocked" },
+						"trigger": "e:add-timer-knockback_roar"
+					}
+				]
+			},
+			"e:target_on_outside_range": {
+				"sequence": [
+					{
+						"filters": { "test": "has_component","subject": "self", "operator": "equals", "value": "minecraft:ravager_blocked" },
+						"trigger": "e:remove-timer-knockback_roar"
+					}
+				]
+			},
+			"e:on_vision_lost_inside_range": {
+				"sequence": [
+					{
+						"filters": { "test": "has_component","subject": "self", "operator": "equals", "value": "minecraft:ravager_blocked" },
+						"trigger": "e:remove-timer-knockback_roar"
+					}
+				]
+			},
+			"e:on_hurt": {
+				"sequence": [
+					{
+						"filters": {
+							"all_of": [
+								{ "test": "has_damage", "subject": "self", "operator": "not", "value": "projectile" },
+								{ "test": "has_tag","subject": "self", "operator": "equals", "value": "can_knockback_roar" }
+							]
+						},
+						"trigger": "e:weight-knockback_roaring"
+					}
+				]
+			},
+			"e:on_hurt_by_player": {
+				"sequence": [
+					{
+						"filters": {
+							"all_of": [
+								{ "test": "has_damage", "subject": "self", "operator": "not", "value": "projectile" },
+								{ "test": "has_tag","subject": "self", "operator": "equals", "value": "can_knockback_roar" }
+							]
+						},
+						"trigger": "e:weight-knockback_roaring"
+					}
+				]
+			},
+			
 			"e:add-physics": { "add": { "component_groups": [ "cg:physics" ] } },
 			"e:remove-physics": { "remove": { "component_groups": [ "cg:physics" ] } },
 			"e:add-knockback_resistance": { "add": { "component_groups": [ "cg:knockback_resistance" ] } },

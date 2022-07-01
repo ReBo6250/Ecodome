@@ -6,7 +6,7 @@
                 "pitch": 1.0,
                 "events": {
                     "death": {"volume": 1.0, "pitch": 0.5, "sound": "mob.creeper.death"},
-                    "hurt": {"volume": 1.0, "pitch": 0.4, "sound": "mob.creeper.hurt"},
+                    "hurt": {"volume": 1.0, "pitch": 0.4, "sound": "mob.creeper.say"},
                     "fuse": {"volume": 1.0, "pitch": 0.3, "sound": "random.fuse"}
                 }
             },
@@ -20,6 +20,13 @@
                     "hurt": {"volume": 1.0, "pitch": 0.4, "sound": "mob.skeleton.hurt"},
                     "roar": {"volume": 1.0, "pitch": 0.2, "sound": "mob.skeleton.hurt"},
                     "shoot": {"volume": 1.0, "pitch": 2.0, "sound": "mob.llama.spit"}
+                }
+            },
+            "ncs:tnt": {
+                "volume": 1.0,
+                "pitch": 1.0,
+                "events": {
+                    "ambient": {"volume": 1.0, "pitch": 0.7, "sound": "random.fuse"}
                 }
             },
             "ncs:mutant_zombie": {

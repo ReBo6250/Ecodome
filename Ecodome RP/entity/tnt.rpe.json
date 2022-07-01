@@ -1,0 +1,25 @@
+{
+	"format_version": "1.10.0",
+	"minecraft:client_entity": {
+		"description": {
+			"identifier": "ncs:tnt",
+			"materials": {
+				"default": "entity_alphatest"
+			},
+			"textures": {
+				"default": "textures/entity/tnt"
+			},
+			"geometry": {
+				"default": "geometry.tnt"
+			},
+			"render_controllers": [
+				"controller.render.tnt"
+			],
+			"scripts": {
+				"pre_animation": [
+					"v.flash = Math.mod(Math.Round(q.life_time * 4), 2.0);"
+				]
+			}
+		}
+	}
+}

@@ -6,6 +6,7 @@ entity.ncs:mutant_creeper.name=Mutant Creeper
 
 item.spawn_egg.entity.ncs:mutant_skeleton.name=Spawn Mutant Skeleton
 entity.ncs:mutant_skeleton.name=Mutant Skeleton
+entity.ncs:mutant_skeleton<>.name=Mutant Skeleton
 
 item.spawn_egg.entity.ncs:mutant_zombie.name=Spawn Mutant Zombie
 entity.ncs:mutant_zombie.name=Mutant Zombie
